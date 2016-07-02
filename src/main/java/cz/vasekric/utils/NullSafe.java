@@ -23,6 +23,17 @@ import java.util.function.Supplier;
  */
 public class NullSafe<T> {
 
+    public static <T> T $resolve(Supplier<T> resolver) {
+        try {
+            T result = resolver.get();
+            return result;
+        }
+        catch (NullPointerException ignored) {
+            return null;
+        }
+    }
+
+    @Deprecated
     public static <T> T resolve(Supplier<T> resolver) {
         try {
             T result = resolver.get();
